@@ -1,5 +1,6 @@
 import { SOURCE_DATABASE } from "@/const";
 import { getArticle, getArticles } from "@/notion/notion";
+import { BlockRenderer } from "@/notion/renderer/BlockRenderer";
 import { format } from "date-fns";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -12,6 +13,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       <h1>{article.title}</h1>
       <p>작성: {format(article.createdTime, "yyyy/MM/dd HH:mm")}</p>
       <p>수정: {format(article.editedTime, "yyyy/MM/dd HH:mm")}</p>
+      <div>
+        {article.blocks.map((block, idx) => (
+          <BlockRenderer key={idx} block={block} />
+        ))}
+      </div>
     </div>
   );
 }

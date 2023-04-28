@@ -4,6 +4,8 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 import { databaseRetrieve, retrieveBlockChildren, retrievePage } from "./api";
 
+export type { BlockObjectResponse as NotionBlock };
+
 export async function getDatabaseContents(id: string) {
   const dbData = await databaseRetrieve(id);
 
@@ -18,7 +20,7 @@ export async function getBlocks(id: string) {
   const data = await retrieveBlockChildren(id);
 
   const blocks = data.results.filter(
-    (result): result is BlockObjectResponse => "properties" in result
+    (result): result is BlockObjectResponse => "type" in result
   );
 
   return blocks;

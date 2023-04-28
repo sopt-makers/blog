@@ -1,5 +1,5 @@
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { getDatabaseContents, getPage } from "./request";
+import { getBlocks, getDatabaseContents, getPage } from "./request";
 
 export async function getArticles(id: string) {
   const objects = await getDatabaseContents(id);
@@ -21,13 +21,15 @@ export async function getArticles(id: string) {
 }
 
 export async function getArticle(id: string) {
-  const meta = await getPage(id);
+  const [meta, blocks] = await Promise.all([getPage(id), getBlocks(id)]);
+
   const title = getTitle(meta.properties);
 
   return {
     title,
     createdTime: Date.parse(meta.created_time),
     editedTime: Date.parse(meta.last_edited_time),
+    blocks,
   };
 }
 
