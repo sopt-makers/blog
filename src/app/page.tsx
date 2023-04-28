@@ -1,20 +1,21 @@
-import { Inter } from "next/font/google";
 import Link from "next/link";
 import { getArticles } from "@/notion/notion";
-
-const inter = Inter({ subsets: ["latin"] });
+import { SOURCE_DATABASE } from "@/const";
 
 export default async function Home() {
-  // const res = await getDBInfo();
-  // const dbData = await getDBData();
-  const articles = await getArticles();
+  const articles = await getArticles(SOURCE_DATABASE);
 
   return (
     <main className="">
       <div className="">
         {articles.map((article) => (
-          <Link key={article.id} href={`/article/${article.id}`}>
+          <Link
+            key={article.id}
+            href={`/article/${article.id}`}
+            className="flex gap-3 hover:bg-gray-100"
+          >
             <h1>{article.title}</h1>
+            <span>{article.createdTime}</span>
           </Link>
         ))}
       </div>

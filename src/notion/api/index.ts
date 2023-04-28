@@ -1,4 +1,5 @@
 import type {
+  GetPageResponse,
   ListBlockChildrenResponse,
   QueryDatabaseResponse,
 } from "@notionhq/client/build/src/api-endpoints";
@@ -36,6 +37,14 @@ export async function databaseRetrieve(id: string) {
 export async function retrieveBlockChildren(id: string) {
   const { data } = await axiosInstance.get<ListBlockChildrenResponse>(
     `https://api.notion.com/v1/blocks/${id}/children?page_size=100`
+  );
+
+  return data;
+}
+
+export async function retrievePage(id: string) {
+  const { data } = await axiosInstance.get<GetPageResponse>(
+    `https://api.notion.com/v1/pages/${id}`
   );
 
   return data;

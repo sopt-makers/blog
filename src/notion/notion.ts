@@ -1,39 +1,42 @@
-import type {
-  BlockObjectResponse,
-  PageObjectResponse,
-} from "@notionhq/client/build/src/api-endpoints";
-import { databaseRetrieve, retrieveBlockChildren } from "./api";
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { getDatabaseContents, getPage } from "./request";
 
-export async function getArticles(): Promise<ArticleMeta[]> {
-  const dbData = await databaseRetrieve("69b53266e67340f882a3a5af7cd5df42");
+export async function getArticles(id: string) {
+  const objects = await getDatabaseContents(id);
 
-  const articles: ArticleMeta[] = dbData.results
-    .filter((result): result is PageObjectResponse => "properties" in result)
-    .map(({ properties, id }) => {
-      const titleProperty = properties["Title"];
-      if (titleProperty.type !== "title") {
-        throw new Error("This should not happen.");
-      }
-      const title = titleProperty.title.map((v) => v.plain_text).join("");
+  const articles = objects.map(
+    ({ properties, id, last_edited_time, created_time }) => {
+      const title = getTitle(properties);
 
       return {
         id,
         title,
+        createdTime: Date.parse(created_time),
+        editedTime: Date.parse(last_edited_time),
       };
-    });
+    }
+  );
 
   return articles;
 }
 
-interface ArticleMeta {
-  id: string;
-  title: string;
+export async function getArticle(id: string) {
+  const meta = await getPage(id);
+  const title = getTitle(meta.properties);
+
+  return {
+    title,
+    createdTime: Date.parse(meta.created_time),
+    editedTime: Date.parse(meta.last_edited_time),
+  };
 }
 
-export async function getArticle(id: string) {
-  const data = await retrieveBlockChildren(id);
+function getTitle(properties: PageObjectResponse["properties"]) {
+  const titleProperty = properties["Title"];
+  if (titleProperty.type !== "title") {
+    throw new Error("This should not happen.");
+  }
+  const title = titleProperty.title.map((v) => v.plain_text).join("");
 
-  const datas = data.results
-    .filter((result): result is BlockObjectResponse => "properties" in result)
-    .map(({}) => {});
+  return title;
 }
