@@ -2,7 +2,9 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    typedRoutes: true,
   },
-}
+  output: "export",
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
