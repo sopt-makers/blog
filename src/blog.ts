@@ -1,5 +1,5 @@
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { getBlocks, getDatabaseContents, getPage } from "./request";
+import { getBlocks, getDatabaseContents, getPage } from "./notion/request";
 
 export async function getArticles(id: string) {
   const objects = await getDatabaseContents(id);

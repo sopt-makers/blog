@@ -1,7 +1,8 @@
 import { SOURCE_DATABASE } from "@/const";
-import { getArticle, getArticles } from "@/notion/notion";
+import { getArticle, getArticles } from "@/blog";
 import { BlockRenderer } from "@/notion/renderer/BlockRenderer";
 import { format } from "date-fns";
+import BlockDebugger from "@/notion/renderer/BlockDebugger";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -16,6 +17,9 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div>
         {article.blocks.map((block, idx) => (
           <BlockRenderer key={idx} block={block} />
+        ))}
+        {article.blocks.map((block, idx) => (
+          <BlockDebugger key={idx} block={block} />
         ))}
       </div>
     </div>

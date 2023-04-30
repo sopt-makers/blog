@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getArticles } from "@/notion/notion";
+import { getArticles } from "@/blog";
 import { SOURCE_DATABASE } from "@/const";
 
 export default async function Home() {
