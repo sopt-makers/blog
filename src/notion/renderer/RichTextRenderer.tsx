@@ -1,6 +1,6 @@
 import type { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import clsx from "clsx";
-import { FC, Fragment, ReactElement, ReactNode } from "react";
+import { FC, ReactElement, ReactNode } from "react";
 
 interface RichTextRendererProps {
   render?: (content: ReactNode) => ReactElement;
@@ -14,17 +14,9 @@ const RichTextRenderer: FC<RichTextRendererProps> = ({
   const rendered = (
     <>
       {richText.map((text, idx) => {
-        if (text.href) {
-          return (
-            <a key={idx} href={text.href}>
-              {text.plain_text}
-            </a>
-          );
-        }
-
         const anno = text.annotations;
 
-        return (
+        const block = (
           <span
             key={idx}
             className={clsx([
@@ -37,6 +29,21 @@ const RichTextRenderer: FC<RichTextRendererProps> = ({
             {text.plain_text}
           </span>
         );
+
+        if (text.href) {
+          return (
+            <a
+              key={idx}
+              href={text.href}
+              className="text-gray-500 underline"
+              target="_blank"
+            >
+              {block}
+            </a>
+          );
+        }
+
+        return block;
       })}
     </>
   );
