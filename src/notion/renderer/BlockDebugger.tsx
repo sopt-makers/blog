@@ -9,7 +9,7 @@ interface BlockDebuggerProps {
 
 const BlockDebugger: FC<BlockDebuggerProps> = ({ block }) => {
   useEffect(() => {
-    console.log(block);
+    console.log("Block Type: ", block.type, block);
   }, [block]);
 
   return null;

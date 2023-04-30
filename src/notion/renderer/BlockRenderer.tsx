@@ -6,6 +6,7 @@ import RichTextRenderer from "./RichTextRenderer";
 import Heading2 from "./block/Heading2";
 import Heading3 from "./block/Heading3";
 import BulettedListItem from "./block/BulettedListItem";
+import NumberedListItem from "./block/NumberedListItem";
 
 interface BlockRendererProps {
   block: NotionBlock;
@@ -24,6 +25,8 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ block }) => {
     return <Heading3 block={block} />;
   } else if (block.type === "bulleted_list_item") {
     return <BulettedListItem block={block} />;
+  } else if (block.type === "numbered_list_item") {
+    return <NumberedListItem block={block} />;
   }
 
   return (

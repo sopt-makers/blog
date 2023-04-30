@@ -11,7 +11,7 @@ const BulettedListItem: FC<BulettedListItemProps> = ({ block }) => {
     <RichTextRenderer
       richText={block.bulleted_list_item.rich_text}
       render={(children) => (
-        <div className="list-disc list-inside">{children}</div>
+        <div className="list-disc list-inside">BUL: {children}</div>
       )}
     />
   );
