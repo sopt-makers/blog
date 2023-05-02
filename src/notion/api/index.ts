@@ -8,6 +8,7 @@ import axios from "axios";
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 
 const axiosInstance = axios.create({
+  baseURL: "https://api.notion.com",
   headers: {
     Authorization: `Bearer ${NOTION_API_KEY}`,
     "Notion-Version": "2022-06-28",
@@ -28,7 +29,7 @@ axiosInstance.interceptors.response.use(
 
 export async function databaseRetrieve(id: string) {
   const { data } = await axiosInstance.post<QueryDatabaseResponse>(
-    `https://api.notion.com/v1/databases/${id}/query`
+    `v1/databases/${id}/query`
   );
 
   return data;
@@ -36,16 +37,14 @@ export async function databaseRetrieve(id: string) {
 
 export async function retrieveBlockChildren(id: string) {
   const { data } = await axiosInstance.get<ListBlockChildrenResponse>(
-    `https://api.notion.com/v1/blocks/${id}/children?page_size=100`
+    `v1/blocks/${id}/children?page_size=100`
   );
 
   return data;
 }
 
 export async function retrievePage(id: string) {
-  const { data } = await axiosInstance.get<GetPageResponse>(
-    `https://api.notion.com/v1/pages/${id}`
-  );
+  const { data } = await axiosInstance.get<GetPageResponse>(`v1/pages/${id}`);
 
   return data;
 }
