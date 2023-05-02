@@ -4,14 +4,17 @@ import { PickNotionBlock } from "@/notion/types";
 
 interface NumberedListItemProps {
   block: PickNotionBlock<"numbered_list_item">;
+  num: number;
 }
 
-const NumberedListItem: FC<NumberedListItemProps> = ({ block }) => {
+const NumberedListItem: FC<NumberedListItemProps> = ({ block, num }) => {
   return (
     <RichTextRenderer
       richText={block.numbered_list_item.rich_text}
       render={(children) => (
-        <div className="list-disc list-inside">NUM: {children}</div>
+        <div className="list-disc list-inside">
+          {num}. {children}
+        </div>
       )}
     />
   );
