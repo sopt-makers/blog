@@ -34,7 +34,7 @@ export async function getArticle(id: string) {
 }
 
 function getTitle(properties: PageObjectResponse["properties"]) {
-  const titleProperty = properties["Title"];
+  const titleProperty = properties["title"];
   if (titleProperty.type !== "title") {
     throw new Error("This should not happen.");
   }

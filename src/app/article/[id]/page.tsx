@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticle(id);
 
   return (
-    <div>
+    <div className="">
       <header className="px-10">
         <h1 className="text-6xl">{article.title}</h1>
         <p>작성: {format(article.createdTime, "yyyy/MM/dd HH:mm")}</p>

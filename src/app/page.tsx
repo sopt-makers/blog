@@ -15,7 +15,6 @@ export default async function Home() {
             className="flex gap-3 hover:bg-gray-100"
           >
             <h1>{article.title}</h1>
-            <span>{article.createdTime}</span>
           </Link>
         ))}
       </div>
