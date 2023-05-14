@@ -7,13 +7,13 @@ export async function getImageUrl() {}
 
 export async function bundleImage(url: string, key: string) {
   const hash = crypto.createHash("sha256").update(key).digest("hex");
-  const imagePath = `./public/img/${hash}`;
+  const imagePath = `./public/files/${hash}`;
 
   if (!fs.existsSync(imagePath)) {
-    console.log("Download Image", key);
+    console.log("Download File", key);
     await downloadImage(url, imagePath);
   }
-  return `/img/${hash}`;
+  return `/files/${hash}`;
 }
 
 async function downloadImage(url: string, filepath: string) {

@@ -13,8 +13,11 @@ export default async function Page({ params }: { params: { id: string } }) {
     <div className="">
       <header className="px-10">
         <h1 className="text-6xl">{article.title}</h1>
-        <p>작성: {format(article.createdTime, "yyyy/MM/dd HH:mm")}</p>
-        <p>수정: {format(article.editedTime, "yyyy/MM/dd HH:mm")}</p>
+        <p>
+          작성:
+          {article.publishedAt && format(article.publishedAt, "yyyy/MM/dd")}
+        </p>
+        <p>카테고리: {article.category}</p>
       </header>
       <div className="px-10">
         <BlockRenderer blocks={article.blocks} />

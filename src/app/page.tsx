@@ -15,6 +15,9 @@ export default async function Home() {
             className="flex gap-3 hover:bg-gray-100"
           >
             <h1>{article.title}</h1>
+            {article.thumbnail && (
+              <img src={article.thumbnail.url} alt="" width="100" />
+            )}
           </Link>
         ))}
       </div>
