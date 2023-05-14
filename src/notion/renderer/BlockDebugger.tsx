@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { FC, useEffect } from "react";
-import { NotionBlock } from "../request";
+import { FC, useEffect } from 'react';
+
+import { NotionBlock } from '../request';
 
 interface BlockDebuggerProps {
   block: NotionBlock;
@@ -9,7 +10,7 @@ interface BlockDebuggerProps {
 
 const BlockDebugger: FC<BlockDebuggerProps> = ({ block }) => {
   useEffect(() => {
-    console.log("Block Type: ", block.type, block);
+    console.log('Block Type: ', block.type, block);
   }, [block]);
 
   return null;

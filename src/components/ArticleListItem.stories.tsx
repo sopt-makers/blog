@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import ArticleListItem from "./ArticleListItem";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import ArticleListItem from './ArticleListItem';
 
 const meta: Meta<typeof ArticleListItem> = {
   component: ArticleListItem,
   argTypes: {
     backgroundColor: {
-      control: "color",
+      control: 'color',
     },
   },
 };
@@ -16,6 +17,6 @@ type Story = StoryObj<typeof ArticleListItem>;
 export const Primary: Story = {
   args: {
     primary: true,
-    label: "Button",
+    label: 'Button',
   },
 };

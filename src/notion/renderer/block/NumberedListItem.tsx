@@ -1,9 +1,11 @@
-import { FC } from "react";
-import RichTextRenderer from "../RichTextRenderer";
-import { PickNotionBlock } from "@/notion/types";
+import { FC } from 'react';
+
+import { PickNotionBlock } from '@/notion/types';
+
+import RichTextRenderer from '../RichTextRenderer';
 
 interface NumberedListItemProps {
-  block: PickNotionBlock<"numbered_list_item">;
+  block: PickNotionBlock<'numbered_list_item'>;
   num: number;
 }
 
@@ -12,7 +14,7 @@ const NumberedListItem: FC<NumberedListItemProps> = ({ block, num }) => {
     <RichTextRenderer
       richText={block.numbered_list_item.rich_text}
       render={(children) => (
-        <div className="list-disc list-inside">
+        <div className='list-inside list-disc'>
           {num}. {children}
         </div>
       )}

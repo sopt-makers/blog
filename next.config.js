@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
     typedRoutes: true,
   },
-  output: "export",
+  output: 'export',
 };
 
 module.exports = nextConfig;
