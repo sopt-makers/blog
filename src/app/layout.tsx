@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='ko' className={`${myFont.variable}`}>
       <body>
-        <div className='min-h-screen text-blog-white'>{children}</div>
+        <div className='min-h-screen text-white100'>{children}</div>
       </body>
     </html>
   );

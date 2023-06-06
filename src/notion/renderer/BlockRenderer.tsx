@@ -51,11 +51,7 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
                 <ImageBlock block={block} />
               );
             default:
-              return (
-                <div>
-                  Unknown Block: <span>{JSON.stringify(block)}</span>
-                </div>
-              );
+              return <div className=''>Unknown Block: {JSON.stringify(block)}</div>;
           }
         })
         .map((el, idx) => (

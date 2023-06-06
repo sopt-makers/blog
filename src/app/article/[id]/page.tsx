@@ -11,14 +11,14 @@ export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticle(id);
 
   return (
-    <div className='px-[16px] '>
+    <div className='mt-[20px] px-[16px]'>
       <div className='flex'>
-        <span className='rounded-[13px] bg-blog-black80 px-[12px] py-[6px] leading-[120%] text-blog-white'>
+        <span className='rounded-[13px] bg-black80 px-[12px] py-[6px] leading-[120%] text-white100'>
           {article.category}
         </span>
       </div>
-      <h1 className='text-[28px] font-bold text-blog-white'>{article.title}</h1>
-      <h4 className='text-[14px] font-light text-blog-gray60'>
+      <h1 className='text-[28px] font-bold text-white100'>{article.title}</h1>
+      <h4 className='text-[14px] font-light text-gray60'>
         {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
       </h4>
       <div className='mt-[40px] flex flex-col gap-y-[20px]'>

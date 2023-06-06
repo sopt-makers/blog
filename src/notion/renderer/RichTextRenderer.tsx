@@ -17,7 +17,7 @@ const RichTextRenderer: FC<RichTextRendererProps> = ({ richText, render = (node)
           <span
             key={idx}
             className={clsx([
-              anno.bold && 'font-bold',
+              anno.bold && 'font-semibold',
               anno.underline && 'underline',
               anno.italic && 'italic',
               anno.strikethrough && 'line-through',
