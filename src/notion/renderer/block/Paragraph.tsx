@@ -9,7 +9,12 @@ interface ParagraphProps {
 }
 
 const Paragraph: FC<ParagraphProps> = ({ block }) => {
-  return <RichTextRenderer richText={block.paragraph.rich_text} render={(children) => <p>{children}</p>} />;
+  return (
+    <RichTextRenderer
+      richText={block.paragraph.rich_text}
+      render={(children) => <p className='text-[17px] font-light leading-[27px] text-blog-gray10'>{children}</p>}
+    />
+  );
 };
 
 export default Paragraph;

@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='min-h-screen'>{children}</div>
+        <div className='min-h-screen text-blog-white'>{children}</div>
       </body>
     </html>
   );

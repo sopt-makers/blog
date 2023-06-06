@@ -11,16 +11,17 @@ export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticle(id);
 
   return (
-    <div className=''>
-      <header className='px-10'>
-        <h1 className='text-6xl'>{article.title}</h1>
-        <p>
-          작성:
-          {article.publishedAt && format(article.publishedAt, 'yyyy/MM/dd')}
-        </p>
-        <p>카테고리: {article.category}</p>
-      </header>
-      <div className='px-10'>
+    <div className='px-[16px] '>
+      <div className='flex'>
+        <span className='rounded-[13px] bg-blog-black80 px-[12px] py-[6px] leading-[120%] text-blog-white'>
+          {article.category}
+        </span>
+      </div>
+      <h1 className='text-[28px] font-bold text-blog-white'>{article.title}</h1>
+      <h4 className='text-[14px] font-light text-blog-gray60'>
+        {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
+      </h4>
+      <div className='mt-[40px] flex flex-col gap-y-[20px]'>
         <BlockRenderer blocks={article.blocks} />
         {article.blocks.map((block, idx) => (
           <BlockDebugger key={idx} block={block} />
