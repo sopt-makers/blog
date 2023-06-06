@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -6,6 +8,9 @@ module.exports = {
       mobile: '640px',
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-suit)', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         'blog-white': '#FCFCFC',
         'blog-gray10': '#F7F8FA',
