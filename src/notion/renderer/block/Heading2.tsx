@@ -12,7 +12,7 @@ const Heading2: FC<Heading2Props> = ({ block }) => {
   return (
     <RichTextRenderer
       richText={block.heading_2.rich_text}
-      render={(children) => <h2 className='mt-[24px] text-2xl font-bold leading-[160%]'>{children}</h2>}
+      render={(children) => <h2 className='mt-[24px] text-2xl font-bold leading-[160%] sm:text-[32px]'>{children}</h2>}
     />
   );
 };
