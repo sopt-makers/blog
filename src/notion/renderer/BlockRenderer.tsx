@@ -2,6 +2,7 @@ import { FC, Fragment } from 'react';
 
 import { NotionBlock } from '../request';
 import BulettedListItem from './block/BulettedListItem';
+import Callout from './block/Callout';
 import Code from './block/Code';
 import Heading1 from './block/Heading1';
 import Heading2 from './block/Heading2';
@@ -53,6 +54,8 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
               );
             case 'quote':
               return <Quote block={block} />;
+            case 'callout':
+              return <Callout block={block} />;
             default:
               const type = block.type;
               const content = block[type as never];

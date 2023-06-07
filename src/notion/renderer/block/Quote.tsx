@@ -1,5 +1,7 @@
-import { PickNotionBlock } from '@/notion/types';
 import { FC } from 'react';
+
+import { PickNotionBlock } from '@/notion/types';
+
 import RichTextRenderer from '../RichTextRenderer';
 
 interface QuoteProps {
