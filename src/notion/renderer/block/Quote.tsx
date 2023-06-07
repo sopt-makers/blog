@@ -13,7 +13,7 @@ const Quote: FC<QuoteProps> = ({ block }) => {
     <RichTextRenderer
       richText={block.quote.rich_text}
       render={(children) => (
-        <div className='pb-[24px] pt-[12px] text-[17px] font-light leading-[160%] text-white100 sm:text-[18px]'>
+        <div className='pb-[24px] pt-[12px] text-[17px] font-light leading-[160%] text-white100 md:text-[18px]'>
           <div className='mb-[4px]'>{quoteIcon}</div>
           {children}
         </div>

@@ -13,7 +13,7 @@ const Paragraph: FC<ParagraphProps> = ({ block }) => {
     <RichTextRenderer
       richText={block.paragraph.rich_text}
       render={(children) => (
-        <p className='line-height text-[17px] font-light leading-[160%] text-gray10 sm:text-[18px]'>{children}</p>
+        <p className='line-height text-[17px] font-light leading-[160%] text-gray10 md:text-[18px]'>{children}</p>
       )}
     />
   );

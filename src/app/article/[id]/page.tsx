@@ -20,20 +20,20 @@ export default async function Page({ params }: { params: { id: string } }) {
           <span className='text-[16px] font-light leading-[20px] text-gray80'>블로그 홈 가기</span>
         </Link>
         {article.thumbnail && (
-          <BundledImage src={article.thumbnail.url} className='rounded-lg border border-real-white/10 sm:rounded-3xl' />
+          <BundledImage src={article.thumbnail.url} className='rounded-lg border border-real-white/10 md:rounded-3xl' />
         )}
-        <div className='mt-[20px] flex sm:mt-[32px]'>
+        <div className='mt-[20px] flex md:mt-[32px]'>
           <span className='rounded-[13px] bg-black80 px-[12px] py-[6px] leading-[120%] text-white100'>
             {article.category}
           </span>
         </div>
-        <h1 className='mt-[12px] break-keep text-[28px] font-bold leading-[130%] text-white100 sm:text-[40px]'>
+        <h1 className='mt-[12px] break-keep text-[28px] font-bold leading-[130%] text-white100 md:text-[40px]'>
           {article.title}
         </h1>
         <h4 className='mt-[8px] text-[14px] font-light text-gray60'>
           {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
         </h4>
-        <div className='mt-[40px] flex flex-col gap-y-[20px] sm:mt-[80px]'>
+        <div className='mt-[40px] flex flex-col gap-y-[20px] md:mt-[80px]'>
           <BlockRenderer blocks={article.blocks} />
           {article.blocks.map((block, idx) => (
             <BlockDebugger key={idx} block={block} />
