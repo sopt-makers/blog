@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import Link from 'next/link';
 
 import { getArticle, getArticles } from '@/blog';
 import BundledImage from '@/components/BundledImage';
@@ -12,7 +13,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticle(id);
 
   return (
-    <div className='mt-[20px] px-[16px]'>
+    <div className='flex flex-col px-[16px]'>
+      <Link href='/' className='flex gap-x-[8px] self-start py-[24px] pr-[8px]'>
+        <BackIcon />
+        <span className='text-[16px] font-light leading-[20px] text-gray80'>블로그 홈 가기</span>
+      </Link>
       {article.thumbnail && (
         <BundledImage src={article.thumbnail.url} className='rounded-lg border border-real-white/10' />
       )}
@@ -41,4 +46,17 @@ export async function generateStaticParams() {
   return articles.map((article) => ({
     id: article.id,
   }));
+}
+
+function BackIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width={20} height={20} fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M13.852 2.642a.498.498 0 010 .7L7.194 10l6.658 6.658a.498.498 0 010 .7.498.498 0 01-.7 0L6.144 10.35a.498.498 0 010-.7l7.008-7.008a.498.498 0 01.7 0z'
+        fill='#808388'
+      />
+    </svg>
+  );
 }
