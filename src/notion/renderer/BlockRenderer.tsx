@@ -9,6 +9,7 @@ import Heading3 from './block/Heading3';
 import ImageBlock from './block/Image';
 import NumberedListItem from './block/NumberedListItem';
 import Paragraph from './block/Paragraph';
+import Quote from './block/Quote';
 
 interface BlockRendererProps {
   blocks: NotionBlock[];
@@ -50,8 +51,16 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
                 /* @ts-expect-error Server Component */
                 <ImageBlock block={block} />
               );
+            case 'quote':
+              return <Quote block={block} />;
             default:
-              return <div className=''>Unknown Block: {JSON.stringify(block)}</div>;
+              const type = block.type;
+              const content = block[type as never];
+              return (
+                <div className='whitespace-pre-wrap'>
+                  Unknown {type}: {JSON.stringify(content, null, 2)}
+                </div>
+              );
           }
         })
         .map((el, idx) => (

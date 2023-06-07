@@ -5,7 +5,7 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     screens: {
-      mobile: '640px',
+      lg: '640px',
     },
     colors: {
       'black100': '#0F1010',
