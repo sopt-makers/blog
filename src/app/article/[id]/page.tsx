@@ -17,8 +17,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           {article.category}
         </span>
       </div>
-      <h1 className='text-[28px] font-bold text-white100'>{article.title}</h1>
-      <h4 className='text-[14px] font-light text-gray60'>
+      <h1 className='mt-[12px] text-[28px] font-bold leading-[130%] text-white100'>{article.title}</h1>
+      <h4 className='mt-[8px] text-[14px] font-light text-gray60'>
         {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
       </h4>
       <div className='mt-[40px] flex flex-col gap-y-[20px]'>

@@ -13,7 +13,7 @@ const Callout: FC<CalloutProps> = ({ block }) => {
     <RichTextRenderer
       richText={block.callout.rich_text}
       render={(children) => (
-        <div className='rounded-[8px] border border-black40 bg-[#161717] p-[20px] text-[17px] font-light'>
+        <div className='rounded-[8px] border border-black40 bg-[#161717] p-[20px] text-[17px] font-light leading-[160%] text-white100'>
           {children}
         </div>
       )}
