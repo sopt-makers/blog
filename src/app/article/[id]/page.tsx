@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 
 import { getArticle, getArticles } from '@/blog';
+import BundledImage from '@/components/BundledImage';
 import { SOURCE_DATABASE } from '@/const';
 import BlockDebugger from '@/notion/renderer/BlockDebugger';
 import { BlockRenderer } from '@/notion/renderer/BlockRenderer';
@@ -12,12 +13,15 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className='mt-[20px] px-[16px]'>
-      <div className='flex'>
+      {article.thumbnail && (
+        <BundledImage src={article.thumbnail.url} className='rounded-lg border border-real-white/10' />
+      )}
+      <div className='mt-[20px] flex'>
         <span className='rounded-[13px] bg-black80 px-[12px] py-[6px] leading-[120%] text-white100'>
           {article.category}
         </span>
       </div>
-      <h1 className='mt-[12px] text-[28px] font-bold leading-[130%] text-white100'>{article.title}</h1>
+      <h1 className='mt-[12px] break-keep text-[28px] font-bold leading-[130%] text-white100'>{article.title}</h1>
       <h4 className='mt-[8px] text-[14px] font-light text-gray60'>
         {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
       </h4>
