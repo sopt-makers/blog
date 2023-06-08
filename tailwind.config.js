@@ -25,6 +25,7 @@ module.exports = {
       'purple100': '#8040FF',
       'purple40': '#C6A9FF',
       'purpledim100': '#282039',
+      'blue-link': '#2180EF',
     },
     extend: {
       fontFamily: {

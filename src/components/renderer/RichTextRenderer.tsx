@@ -29,7 +29,7 @@ const RichTextRenderer: FC<RichTextRendererProps> = ({ richText, render = (node)
 
         if (text.href) {
           return (
-            <a key={idx} href={text.href} className='text-gray-500 underline' target='_blank'>
+            <a key={idx} href={text.href} className='text-blue-link' target='_blank'>
               {block}
             </a>
           );
