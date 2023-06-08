@@ -16,7 +16,7 @@ export default async function Home() {
         <div className='px-[16px] py-[20px]'>
           <MakersLogo className='h-[50px]' />
         </div>
-        <div className='sticky  top-0 flex gap-[8px] bg-black100 px-[16px] py-[12px] md:mt-[56px]'>
+        <div className='sticky top-0 flex gap-[8px] bg-black100 px-[16px] py-[12px] md:mt-[56px]'>
           <Chip>전체</Chip>
           {categories.map((category) => (
             <Chip key={category}>{category}</Chip>
