@@ -2,7 +2,7 @@
 
 import { FC, useEffect } from 'react';
 
-import { NotionBlock } from '../request';
+import { NotionBlock } from '../../notion/request';
 
 interface BlockDebuggerProps {
   block: NotionBlock;

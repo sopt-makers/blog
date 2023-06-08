@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 import { getArticle, getArticles } from '@/blog';
 import BundledImage from '@/components/BundledImage';
+import BlockDebugger from '@/components/renderer/BlockDebugger';
+import { BlockRenderer } from '@/components/renderer/BlockRenderer';
 import { SOURCE_DATABASE } from '@/const';
-import BlockDebugger from '@/notion/renderer/BlockDebugger';
-import { BlockRenderer } from '@/notion/renderer/BlockRenderer';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;

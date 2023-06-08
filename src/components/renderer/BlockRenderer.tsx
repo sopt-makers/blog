@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react';
 
-import { NotionBlock } from '../request';
+import { NotionBlock } from '../../notion/request';
 import BulettedListItem from './block/BulettedListItem';
 import Callout from './block/Callout';
 import Code from './block/Code';
