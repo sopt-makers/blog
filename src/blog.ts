@@ -5,15 +5,15 @@ import { getBlocks, getDatabaseContents, getPage } from './notion/request';
 export async function getArticles(id: string) {
   const objects = await getDatabaseContents(id);
 
-  const articles = objects.map(({ properties, id, last_edited_time, created_time }) => {
-    const { title, thumbnail } = extractArticleProperties(properties);
+  const articles = objects.map(({ properties, id }) => {
+    const { title, thumbnail, publishedAt, category } = extractArticleProperties(properties);
 
     return {
       id,
       title,
-      createdTime: Date.parse(created_time),
-      editedTime: Date.parse(last_edited_time),
       thumbnail,
+      publishedAt,
+      category,
     };
   });
 

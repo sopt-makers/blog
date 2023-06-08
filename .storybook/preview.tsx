@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/react';
+import React from 'react';
+import RootLayout from '../src/app/layout';
 
 import '../src/app/globals.css';
 
@@ -12,6 +14,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <RootLayout>
+        <Story />
+      </RootLayout>
+    ),
+  ],
 };
 
 export default preview;

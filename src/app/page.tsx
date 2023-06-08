@@ -1,11 +1,14 @@
+import { format } from 'date-fns';
 import Link from 'next/link';
 
 import { getArticles } from '@/blog';
 import BundledImage from '@/components/BundledImage';
+import Chip from '@/components/common/Chip';
 import { SOURCE_DATABASE } from '@/const';
 
 export default async function Home() {
   const articles = await getArticles(SOURCE_DATABASE);
+  const categories = articles.map((article) => article.category).filter((category): category is string => !!category);
 
   return (
     <div className='flex flex-col items-center'>
@@ -13,12 +16,19 @@ export default async function Home() {
         <div className='px-[16px] py-[20px]'>
           <MakersLogo className='h-[50px]' />
         </div>
-        <div className='px-[16px] py-[12px]'></div>
+        <div className='sticky  top-0 flex gap-[8px] bg-black100 px-[16px] py-[12px] md:mt-[56px]'>
+          <Chip>전체</Chip>
+          {categories.map((category) => (
+            <Chip key={category}>{category}</Chip>
+          ))}
+        </div>
         <div className=''>
           {articles.map((article) => (
             <Link key={article.id} href={`/article/${article.id}`} className='flex px-[24px] py-[16px] md:py-[40px]'>
               <div className='flex flex-grow flex-col'>
-                <div className='text-[14px] font-light text-gray60 md:text-[16px]'>팀 이야기 | 2023.06.07</div>
+                <div className='text-[14px] font-light text-gray60 md:text-[16px]'>
+                  {article.category} | {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
+                </div>
                 <h1 className='mt-[6px] line-clamp-2 flex-grow break-keep text-[22px] font-bold leading-tight text-white100 md:mt-[8px] md:text-[28px]'>
                   {article.title}
                 </h1>
