@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div className='flex flex-col items-center'>
-      <div className='flex max-w-[800px] flex-col px-[16px]'>
+      <div className='flex w-full max-w-[800px] flex-col px-[16px]'>
         <Link href='/' className='flex gap-x-[8px] self-start py-[24px] pr-[8px]'>
           <BackIcon />
           <span className='text-[16px] font-light leading-[20px] text-gray80'>블로그 홈 가기</span>
