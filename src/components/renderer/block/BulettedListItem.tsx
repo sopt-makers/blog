@@ -1,5 +1,6 @@
 import { getBlocks } from '@/notion/request';
 import { PickNotionBlock } from '@/notion/types';
+import { wrapAsyncComponent } from '@/util';
 
 import { BlockRenderer } from '../BlockRenderer';
 import RichTextRenderer from '../RichTextRenderer';
@@ -21,13 +22,16 @@ const BulettedListItem = async ({ block }: BulettedListItemProps) => {
     <RichTextRenderer
       richText={block.bulleted_list_item.rich_text}
       render={(text) => (
-        <div className='list-inside list-disc'>
-          <div>- {text}</div>
-          <div className='ml-3'>{children}</div>
+        <div className='flex'>
+          <div className='pr-[5px] text-[17px] font-light leading-[160%] text-gray10 md:text-[18px]'>•</div>
+          <div className='flex flex-grow flex-col'>
+            <div className='text-[17px] font-light leading-[160%] text-gray10 md:text-[18px]'>{text}</div>
+            {children}
+          </div>
         </div>
       )}
     />
   );
 };
 
-export default BulettedListItem;
+export default wrapAsyncComponent(BulettedListItem);

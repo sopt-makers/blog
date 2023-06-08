@@ -33,11 +33,8 @@ export default async function Page({ params }: { params: { id: string } }) {
         <h4 className='mt-[8px] text-[14px] font-light text-gray60'>
           {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
         </h4>
-        <div className='mt-[40px] flex flex-col gap-y-[20px] md:mt-[80px]'>
+        <div className='mt-[40px] md:mt-[80px]'>
           <BlockRenderer blocks={article.blocks} />
-          {article.blocks.map((block, idx) => (
-            <BlockDebugger key={idx} block={block} />
-          ))}
         </div>
       </div>
     </div>

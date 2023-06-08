@@ -1,5 +1,6 @@
 import { bundleImage } from '@/image';
 import { PickNotionBlock } from '@/notion/types';
+import { wrapAsyncComponent } from '@/util';
 
 interface ImageProps {
   block: PickNotionBlock<'image'>;
@@ -27,4 +28,4 @@ const Image = async ({ block }: ImageProps) => {
   );
 };
 
-export default Image;
+export default wrapAsyncComponent(Image);
