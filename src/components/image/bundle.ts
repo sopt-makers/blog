@@ -1,3 +1,5 @@
+import 'server-only';
+
 import axios from 'axios';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
@@ -10,13 +12,14 @@ export async function bundleImage(url: string, key: string) {
   const imagePath = `./public/files/${hash}`;
 
   if (!fs.existsSync(imagePath)) {
-    console.log('Download File', key);
     await downloadImage(url, imagePath);
   }
-  return `/files/${hash}`;
+  return { publicUrl: `/files/${hash}`, filePath: imagePath };
 }
 
 async function downloadImage(url: string, filepath: string) {
+  console.log('Downloading Image:', url, filepath);
+
   const response = await axios({
     url,
     method: 'GET',

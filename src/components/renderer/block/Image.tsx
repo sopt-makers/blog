@@ -1,4 +1,4 @@
-import BundledImage from '@/components/BundledImage';
+import BundledImage from '@/components/image/BundledImage';
 import { PickNotionBlock } from '@/notion/types';
 
 interface ImageProps {

@@ -2,8 +2,8 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 
 import { getArticles } from '@/blog';
-import BundledImage from '@/components/BundledImage';
 import Chip from '@/components/common/Chip';
+import BundledImage from '@/components/image/BundledImage';
 import { SOURCE_DATABASE } from '@/const';
 
 export default async function Home() {

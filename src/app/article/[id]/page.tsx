@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 
 import { getArticle, getArticles } from '@/blog';
-import BundledImage from '@/components/BundledImage';
+import BundledImage from '@/components/image/BundledImage';
 import BlockDebugger from '@/components/renderer/BlockDebugger';
 import { BlockRenderer } from '@/components/renderer/BlockRenderer';
 import { SOURCE_DATABASE } from '@/const';
@@ -20,7 +20,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           <span className='text-[16px] font-light leading-[20px] text-gray80'>블로그 홈 가기</span>
         </Link>
         {article.thumbnail && (
-          <BundledImage src={article.thumbnail.url} className='rounded-lg border border-real-white/10 md:rounded-3xl' />
+          <div className='overflow-clip rounded-lg border border-real-white/10 md:rounded-3xl'>
+            <BundledImage src={article.thumbnail.url} className='' />
+          </div>
         )}
         <div className='mt-[20px] flex md:mt-[32px]'>
           <span className='rounded-[13px] bg-black80 px-[12px] py-[6px] leading-[120%] text-white100'>
