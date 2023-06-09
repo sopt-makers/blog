@@ -44,7 +44,7 @@ const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, w
     <img
       src={loaded ? src : preview}
       alt={alt}
-      className={clsx(!loaded && 'blur', animate && 'transition-[filter] duration-150')}
+      className={clsx(!loaded && 'blur', animate && 'transition-[filter] duration-150', className)}
       style={{ aspectRatio: `${width} / ${height}` }}
       width={width}
       height={height}
