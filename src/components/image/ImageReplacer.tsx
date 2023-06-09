@@ -6,10 +6,13 @@ import { FC, ImgHTMLAttributes, useEffect, useState } from 'react';
 interface ImageReplacerProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   preview: string;
+  width: number;
+  height: number;
 }
 
-const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, ...props }) => {
+const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, width, height, ...props }) => {
   const [loaded, setLoaded] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     const img = new Image();
@@ -17,6 +20,7 @@ const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, .
 
     const loaded = () => {
       setLoaded(true);
+      console.log('Loaded!');
     };
     img.addEventListener('load', loaded);
 
@@ -25,11 +29,25 @@ const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, .
     };
   }, [src]);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAnimate(true);
+      console.log('ANIMATE!');
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <img
       src={loaded ? src : preview}
       alt={alt}
-      className={clsx(!loaded && 'blur-md', 'transition-[filter] duration-100', className)}
+      className={clsx(!loaded && 'blur', animate && 'transition-[filter] duration-150')}
+      style={{ aspectRatio: `${width} / ${height}` }}
+      width={width}
+      height={height}
       {...props}
     />
   );
