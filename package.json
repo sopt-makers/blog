@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run clean && next build",
     "start": "next start",
+    "clean": "rimraf ./.next/cache",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -49,6 +50,7 @@
     "eslint-plugin-storybook": "^0.6.12",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
+    "rimraf": "^5.0.1",
     "storybook": "^7.0.11"
   }
 }

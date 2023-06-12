@@ -13,7 +13,9 @@ const Code: FC<CodeProps> = ({ block }) => {
     <RichTextRenderer
       richText={block.code.rich_text}
       render={(children) => (
-        <code className='block rounded-[8px] bg-black60 p-[20px] font-mono text-[13px] text-white100'>{children}</code>
+        <code className='block w-full overflow-x-auto whitespace-pre rounded-[8px] bg-black60 p-[20px] font-mono text-[13px] text-white100'>
+          {children}
+        </code>
       )}
     />
   );
