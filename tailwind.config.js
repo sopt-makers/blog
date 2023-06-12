@@ -30,6 +30,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-suit)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-roboto-mono)', ...defaultTheme.fontFamily.mono],
       },
 
       backgroundImage: {
