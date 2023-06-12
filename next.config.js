@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-    typedRoutes: true,
+    typedRoutes: false,
   },
   output: 'export',
 };

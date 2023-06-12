@@ -22,6 +22,7 @@
     "date-fns": "^2.29.3",
     "eslint": "8.39.0",
     "eslint-config-next": "^13.4.1",
+    "js-base64": "^3.7.5",
     "next": "^13.4.1",
     "notion-client": "^6.16.0",
     "notion-types": "^6.16.0",

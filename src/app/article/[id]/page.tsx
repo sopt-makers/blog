@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { getArticle, getArticles } from '@/blog';
 import BundledImage from '@/components/image/BundledImage';
-import BlockDebugger from '@/components/renderer/BlockDebugger';
 import { BlockRenderer } from '@/components/renderer/BlockRenderer';
 import { SOURCE_DATABASE } from '@/const';
 

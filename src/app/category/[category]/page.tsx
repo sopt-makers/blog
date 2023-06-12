@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { decode, encode } from 'js-base64';
 import Link from 'next/link';
 
 import { getArticles } from '@/blog';
@@ -6,14 +7,8 @@ import Chip from '@/components/common/Chip';
 import BundledImage from '@/components/image/BundledImage';
 import { SOURCE_DATABASE } from '@/const';
 
-export async function generateStaticParams() {
-  const articles = await getArticles(SOURCE_DATABASE);
-
-  return articles.map((article) => article.category).filter((category): category is string => !!category);
-}
-
 export default async function ArticleList({ params }: { params: { category?: string } }) {
-  const currentCategory = params.category ? decodeURIComponent(params.category) : undefined;
+  const currentCategory = params.category ? decode(decodeURIComponent(params.category)) : undefined;
 
   const articles = await getArticles(SOURCE_DATABASE);
   const categories = articles.map((article) => article.category).filter((category): category is string => !!category);
@@ -30,7 +25,7 @@ export default async function ArticleList({ params }: { params: { category?: str
             <Chip active={!currentCategory}>전체</Chip>
           </Link>
           {categories.map((category) => (
-            <Link key={category} href={`/category/${category}`}>
+            <Link key={category} href={`/category/${encode(category)}`}>
               <Chip active={category === currentCategory}>{category}</Chip>
             </Link>
           ))}
@@ -62,6 +57,17 @@ export default async function ArticleList({ params }: { params: { category?: str
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const articles = await getArticles(SOURCE_DATABASE);
+
+  const params = articles
+    .map((article) => article.category)
+    .filter((category): category is string => !!category)
+    .map((category) => ({ category: encode(category) }));
+
+  return params;
 }
 
 function MakersLogo(props: React.SVGProps<SVGSVGElement>) {
