@@ -5,44 +5,49 @@ import type {
   ListBlockChildrenResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import axios from 'axios';
+import { cache } from 'react';
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 
-const axiosInstance = axios.create({
-  baseURL: 'https://api.notion.com',
-  headers: {
-    'Authorization': `Bearer ${NOTION_API_KEY}`,
-    'Notion-Version': '2022-06-28',
-  },
-});
+const defaultHeaders = {
+  'Authorization': `Bearer ${NOTION_API_KEY}`,
+  'Notion-Version': '2022-06-28',
+};
 
-axiosInstance.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  function (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(error.response?.data);
-    }
-    return Promise.reject(error);
-  },
-);
+async function fetchWithErrorHandling(url: string, options: RequestInit): Promise<Response> {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error(errorData);
+    throw new Error(`Request failed: ${response.status}`);
+  }
+  return response;
+}
 
 export async function databaseRetrieve(id: string) {
-  const { data } = await axiosInstance.post<QueryDatabaseResponse>(`v1/databases/${id}/query`);
+  const response = await fetchWithErrorHandling(`https://api.notion.com/v1/databases/${id}/query`, {
+    method: 'POST',
+    headers: defaultHeaders,
+  });
 
+  const data: QueryDatabaseResponse = await response.json();
   return data;
 }
 
-export async function retrieveBlockChildren(id: string) {
-  const { data } = await axiosInstance.get<ListBlockChildrenResponse>(`v1/blocks/${id}/children?page_size=100`);
+export const retrieveBlockChildren = cache(async (id: string) => {
+  const response = await fetchWithErrorHandling(`https://api.notion.com/v1/blocks/${id}/children?page_size=100`, {
+    headers: defaultHeaders,
+  });
 
+  const data: ListBlockChildrenResponse = await response.json();
   return data;
-}
+});
 
 export async function retrievePage(id: string) {
-  const { data } = await axiosInstance.get<GetPageResponse>(`v1/pages/${id}`);
+  const response = await fetchWithErrorHandling(`https://api.notion.com/v1/pages/${id}`, {
+    headers: defaultHeaders,
+  });
 
+  const data: GetPageResponse = await response.json();
   return data;
 }
