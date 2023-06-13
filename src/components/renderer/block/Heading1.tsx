@@ -13,7 +13,7 @@ const Heading1: FC<Heading1Props> = ({ block }) => {
     <RichTextRenderer
       richText={block.heading_1.rich_text}
       render={(children) => (
-        <h2 className='mt-[24px] text-[32px] font-bold leading-[160%] md:text-[32px]'>{children}</h2>
+        <h2 className='mt-[24px] text-[24px] font-bold leading-[160%] md:text-[32px]'>{children}</h2>
       )}
     />
   );

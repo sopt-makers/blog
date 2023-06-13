@@ -23,7 +23,7 @@ const BulettedListItem = async ({ block }: BulettedListItemProps) => {
       richText={block.bulleted_list_item.rich_text}
       render={(text) => (
         <div className='flex'>
-          <div className='pr-[5px] text-[17px] font-light leading-[160%] text-gray10 md:text-[18px]'>•</div>
+          <div className='pr-[8px] text-[17px] font-light leading-[160%] text-gray10 md:text-[18px]'>•</div>
           <div className='flex flex-grow flex-col'>
             <div className='text-[17px] font-light leading-[160%] text-gray10 md:text-[18px]'>{text}</div>
             {children}

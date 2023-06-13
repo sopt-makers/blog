@@ -20,7 +20,7 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
   const merged = mergeBlocks(blocks);
 
   return (
-    <div className='flex flex-col gap-y-[20px]'>
+    <div className='flex flex-col gap-y-[20px] pb-[20px]'>
       {merged.map((blockOrArray, idx) => {
         if (Array.isArray(blockOrArray)) {
           return (
