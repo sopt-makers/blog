@@ -7,6 +7,14 @@ import BundledImage from '@/components/image/BundledImage';
 import { BlockRenderer } from '@/components/renderer/BlockRenderer';
 import { SOURCE_DATABASE } from '@/const';
 
+export const metadata = {
+  title: '메이커스 블로그',
+  description: '',
+  openGraph: {
+    title: '메이커스 블로그',
+  },
+};
+
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
 

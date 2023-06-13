@@ -18,6 +18,9 @@ const robotoMonoFont = Roboto_Mono({
 export const metadata = {
   title: '메이커스 블로그',
   description: '',
+  openGraph: {
+    title: '메이커스 블로그',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
