@@ -15,7 +15,13 @@ const Image = ({ block }: ImageProps) => {
     throw new Error('Invalid image type');
   })();
 
-  return <BundledImage src={url} alt='Image' className='w-full' />;
+  return (
+    <BundledImage
+      src={url}
+      alt={block.image.caption.map((text) => text.plain_text).join('') ?? 'Article Image'}
+      className='w-full'
+    />
+  );
 };
 
 export default Image;
