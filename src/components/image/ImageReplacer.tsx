@@ -20,7 +20,6 @@ const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, w
 
     const loaded = () => {
       setLoaded(true);
-      console.log('Loaded!');
     };
     img.addEventListener('load', loaded);
 
@@ -32,7 +31,6 @@ const ImageReplacer: FC<ImageReplacerProps> = ({ src, preview, alt, className, w
   useEffect(() => {
     const timeout = setTimeout(() => {
       setAnimate(true);
-      console.log('ANIMATE!');
     }, 500);
 
     return () => {

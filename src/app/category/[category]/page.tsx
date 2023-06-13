@@ -37,9 +37,21 @@ export default async function ArticleList({ params }: { params: { category?: str
                 <div className='text-[14px] font-light text-gray60 md:text-[16px]'>
                   {article.category} | {article.publishedAt && format(article.publishedAt, 'yyyy.MM.dd')}
                 </div>
-                <h1 className='mt-[6px] line-clamp-2 flex-grow break-keep text-[22px] font-bold leading-tight text-white100 md:mt-[8px] md:text-[28px]'>
+                <h1 className='mt-[6px] line-clamp-2 break-keep text-[22px] font-bold leading-tight text-white100 md:mt-[8px] md:text-[28px]'>
                   {article.title}
                 </h1>
+                <div className='mt-[12px] text-[14px] font-light md:text-[16px]'>
+                  {article.editors.length === 1 && (
+                    <>
+                      <span className='text-white100'>{article.editors[0].name}</span>
+                      <span className='px-[4px] text-gray60'>∙</span>
+                      <span className='text-gray60'>{article.editors[0].role}</span>
+                    </>
+                  )}
+                  {article.editors.length >= 2 && (
+                    <span className='text-white100'>{article.editors.map((editor) => editor.name).join(', ')}</span>
+                  )}
+                </div>
               </div>
               {article.thumbnail && (
                 <div className='mt-[25px] flex h-[68px] w-[68px] justify-center overflow-hidden md:mt-0 md:h-[140px] md:w-[140px]'>

@@ -6,11 +6,12 @@ export async function getArticles(id: string) {
   const objects = await getDatabaseContents(id);
 
   const articles = objects.map(({ properties, id }) => {
-    const { title, thumbnail, publishedAt, category } = extractArticleProperties(properties);
+    const { title, thumbnail, publishedAt, category, editors } = extractArticleProperties(properties);
 
     return {
       id,
       title,
+      editors,
       thumbnail,
       publishedAt,
       category,
@@ -23,10 +24,11 @@ export async function getArticles(id: string) {
 export async function getArticle(id: string) {
   const [meta, blocks] = await Promise.all([getPage(id), getBlocks(id)]);
 
-  const { title, publishedAt, category, thumbnail } = extractArticleProperties(meta.properties);
+  const { title, publishedAt, category, thumbnail, editors } = extractArticleProperties(meta.properties);
 
   return {
     title,
+    editors,
     publishedAt,
     category,
     thumbnail,
@@ -38,10 +40,14 @@ function extractArticleProperties(properties: PageObjectResponse['properties']) 
   const resolver = propertyResolver(properties);
 
   const title = resolver.title('title');
-  const editorIds = resolver
-    .richText('editorIds')
-    .split(',')
-    .map((s) => parseInt(s, 10));
+  const editors = resolver.multiSelect('editors').map((raw) => {
+    const [name, role = undefined] = raw.split('|');
+
+    return {
+      name,
+      role,
+    };
+  });
   const publishedAt = resolver.date('publishedAt');
   const category = resolver.select('category');
   const thumbnailFiles = resolver.files('thumbnail');
@@ -49,7 +55,7 @@ function extractArticleProperties(properties: PageObjectResponse['properties']) 
 
   return {
     title,
-    editorIds,
+    editors,
     publishedAt,
     category,
     thumbnail,
@@ -98,6 +104,11 @@ function propertyResolver(properties: PageObjectResponse['properties']) {
       const selectProperty = getTypedProperty(name, 'select');
 
       return selectProperty.select?.name ?? null;
+    },
+    multiSelect(name: string) {
+      const multiSelectProperty = getTypedProperty(name, 'multi_select');
+
+      return multiSelectProperty.multi_select.map((select) => select.name);
     },
     files(name: string) {
       const filesProperty = getTypedProperty(name, 'files');
