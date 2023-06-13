@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { encode } from 'js-base64';
 import Link from 'next/link';
 
 import { getArticle, getArticles } from '@/blog';
@@ -24,9 +25,15 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         )}
         <div className='mt-[20px] flex md:mt-[32px]'>
-          <span className='rounded-[13px] bg-black80 px-[12px] py-[6px] leading-[120%] text-white100'>
-            {article.category}
-          </span>
+          {article.category && (
+            <>
+              <Link href={`/category/${encode(article.category)}`}>
+                <span className='rounded-[13px] bg-black80 px-[12px] py-[6px] leading-[120%] text-white100'>
+                  {article.category}
+                </span>
+              </Link>
+            </>
+          )}
         </div>
         <h1 className='mt-[12px] break-keep text-[28px] font-bold leading-[130%] text-white100 md:text-[40px]'>
           {article.title}
