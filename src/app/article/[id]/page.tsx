@@ -1,21 +1,44 @@
 import { format } from 'date-fns';
 import { encode } from 'js-base64';
+import type { Metadata, ResolvingMetadata } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 
 import { getArticle, getArticles } from '@/blog';
-import BundledImage from '@/components/image/BundledImage';
+import { bundleImage } from '@/components/image/bundle';
+import BundledImage, { getBundleKey } from '@/components/image/BundledImage';
 import { BlockRenderer } from '@/components/renderer/BlockRenderer';
-import { SOURCE_DATABASE } from '@/const';
+import { BASE_URL, SOURCE_DATABASE } from '@/const';
 
-export const metadata = {
-  title: '메이커스 블로그',
-  description: '',
-  openGraph: {
-    title: '메이커스 블로그',
-  },
-};
+type Props = { params: { id: string } };
 
-export default async function Page({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: Props, _parent: ResolvingMetadata): Promise<Metadata> {
+  const id = params.id;
+  const article = await getArticle(id);
+
+  const thumbnailImage = await (async () => {
+    if (!article.thumbnail) {
+      return undefined;
+    }
+    const { publicUrl } = await bundleImage(article.thumbnail.url, getBundleKey(article.thumbnail.url));
+    return [`${BASE_URL}${publicUrl}`];
+  })();
+
+  return {
+    description: article.title,
+    openGraph: {
+      title: '메이커스 블로그',
+      description: article.title,
+      type: 'article',
+      images: thumbnailImage,
+    },
+    other: {
+      a: ['b', 'c'],
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
   const id = params.id;
 
   const article = await getArticle(id);

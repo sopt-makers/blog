@@ -12,14 +12,16 @@ interface BundledImage extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
 }
 
+export const getBundleKey = (src: string) => {
+  if (src.startsWith(NOTION_FILE_PREFIX)) {
+    const url = new URL(src);
+    return url.pathname;
+  }
+  return src;
+};
+
 const BundledImage = async ({ src, alt, ...props }: BundledImage) => {
-  const bundleKey = (() => {
-    if (src.startsWith(NOTION_FILE_PREFIX)) {
-      const url = new URL(src);
-      return url.pathname;
-    }
-    return src;
-  })();
+  const bundleKey = getBundleKey(src);
 
   const { publicUrl, filePath } = await bundleImage(src, bundleKey);
   const { width, height } = await getImageSize(filePath);
