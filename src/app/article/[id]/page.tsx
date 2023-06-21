@@ -39,6 +39,18 @@ export async function generateMetadata({ params }: Props, _parent: ResolvingMeta
       type: 'article',
       images: thumbnailImage,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        'index': true,
+        'follow': true,
+        'noimageindex': false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

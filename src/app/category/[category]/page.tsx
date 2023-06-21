@@ -6,6 +6,17 @@ import { getArticles } from '@/blog';
 import Chip from '@/components/common/Chip';
 import BundledImage from '@/components/image/BundledImage';
 
+export async function generateStaticParams() {
+  const articles = await getArticles();
+
+  const params = articles
+    .map((article) => article.category)
+    .filter((category): category is string => !!category)
+    .map((category) => ({ category: encode(category) }));
+
+  return params;
+}
+
 export default async function ArticleList({ params }: { params: { category?: string } }) {
   const currentCategory = params.category ? decode(decodeURIComponent(params.category)) : undefined;
 
@@ -68,17 +79,6 @@ export default async function ArticleList({ params }: { params: { category?: str
       </div>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  const articles = await getArticles();
-
-  const params = articles
-    .map((article) => article.category)
-    .filter((category): category is string => !!category)
-    .map((category) => ({ category: encode(category) }));
-
-  return params;
 }
 
 function MakersLogo(props: React.SVGProps<SVGSVGElement>) {
