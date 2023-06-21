@@ -5,12 +5,11 @@ import Link from 'next/link';
 import { getArticles } from '@/blog';
 import Chip from '@/components/common/Chip';
 import BundledImage from '@/components/image/BundledImage';
-import { SOURCE_DATABASE } from '@/const';
 
 export default async function ArticleList({ params }: { params: { category?: string } }) {
   const currentCategory = params.category ? decode(decodeURIComponent(params.category)) : undefined;
 
-  const articles = await getArticles(SOURCE_DATABASE);
+  const articles = await getArticles();
   const categories = articles.map((article) => article.category).filter((category): category is string => !!category);
   const filteredArticles = articles.filter((article) => !currentCategory || article.category === currentCategory);
 
@@ -72,7 +71,7 @@ export default async function ArticleList({ params }: { params: { category?: str
 }
 
 export async function generateStaticParams() {
-  const articles = await getArticles(SOURCE_DATABASE);
+  const articles = await getArticles();
 
   const params = articles
     .map((article) => article.category)

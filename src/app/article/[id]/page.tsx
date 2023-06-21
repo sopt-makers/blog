@@ -1,16 +1,16 @@
 import type { Metadata, ResolvingMetadata } from 'next';
 
-import { getArticle, getArticles } from '@/blog';
+import { getArticleById, getArticles } from '@/blog';
 import ArticlePage from '@/components/article/ArticlePage';
 import { bundleImage } from '@/components/image/bundle';
 import { getBundleKey } from '@/components/image/BundledImage';
-import { BASE_URL, SOURCE_DATABASE } from '@/const';
+import { BASE_URL } from '@/const';
 
 type Props = { params: { id: string } };
 
 export async function generateMetadata({ params }: Props, _parent: ResolvingMetadata): Promise<Metadata> {
   const id = params.id;
-  const article = await getArticle(id);
+  const article = await getArticleById(id);
 
   const thumbnailImage = await (async () => {
     if (!article.thumbnail) {
@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
 }
 
 export async function generateStaticParams() {
-  const articles = await getArticles(SOURCE_DATABASE);
+  const articles = await getArticles();
 
   return articles.map((article) => ({
     id: article.id,

@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { encode } from 'js-base64';
 import Link from 'next/link';
 
-import { getArticle } from '@/blog';
+import { getArticleById } from '@/blog';
 import BundledImage from '@/components/image/BundledImage';
 import { BlockRenderer } from '@/components/renderer/BlockRenderer';
 import { wrapAsyncComponent } from '@/util';
@@ -12,7 +12,7 @@ interface ArticlePageProps {
 }
 
 async function ArticlePage({ id }: ArticlePageProps) {
-  const article = await getArticle(id);
+  const article = await getArticleById(id);
 
   return (
     <div className='flex flex-col items-center'>
