@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
 
       - name: Set .env
-        run: echo "${{ inputs.env }}" > .env.local
+        run: echo "${{ secrets.env }}" > .env.local
 
       - name: Build
         run: yarn build && yarn next export
