@@ -3,13 +3,13 @@ name: Build App
 on:
   workflow_call:
     inputs:
-      env:
-        required: true
-        type: string
       upload:
         required: false
         type: boolean
         default: true
+    secrets:
+      env:
+        required: true
 
 jobs:
   build:

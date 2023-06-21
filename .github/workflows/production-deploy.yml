@@ -6,8 +6,8 @@ on:
 jobs:
   build-app:
     uses: ./.github/workflows/build.yml
-    with:
-      env: ${{ secrets.PRODUCTION_ENV }}
+    secrets:
+      env: ${{  secrets.PRODUCTION_ENV }}
 
   deploy:
     needs: build-app
