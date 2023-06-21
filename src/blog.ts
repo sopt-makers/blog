@@ -9,7 +9,7 @@ export async function getArticles() {
   const objects = await getDatabaseContents(SOURCE_DATABASE);
 
   const articles = objects.map(({ properties, id }) => {
-    const { title, thumbnail, publishedAt, category, editors } = extractArticleProperties(properties);
+    const { title, thumbnail, publishedAt, category, editors, publish } = extractArticleProperties(properties);
 
     return {
       id,
@@ -18,6 +18,7 @@ export async function getArticles() {
       thumbnail,
       publishedAt,
       category,
+      publish,
     };
   });
 
@@ -27,7 +28,7 @@ export async function getArticles() {
 export async function getArticleById(id: string) {
   const [meta, blocks] = await Promise.all([getPage(id), getBlocks(id)]);
 
-  const { title, publishedAt, category, thumbnail, editors } = extractArticleProperties(meta.properties);
+  const { title, publishedAt, category, thumbnail, editors, publish } = extractArticleProperties(meta.properties);
 
   return {
     title,
@@ -36,11 +37,8 @@ export async function getArticleById(id: string) {
     category,
     thumbnail,
     blocks,
+    publish,
   };
-}
-
-export async function getArticleIdBySeq(seq: string) {
-  const articles = await getArticles();
 }
 
 function extractArticleProperties(properties: PageObjectResponse['properties']) {
@@ -59,6 +57,7 @@ function extractArticleProperties(properties: PageObjectResponse['properties']) 
   const category = resolver.select('category');
   const thumbnailFiles = resolver.files('thumbnail');
   const thumbnail = thumbnailFiles.length > 0 ? thumbnailFiles[0] : null;
+  const publish = resolver.checkbox('publish');
 
   return {
     title,
@@ -66,5 +65,6 @@ function extractArticleProperties(properties: PageObjectResponse['properties']) 
     publishedAt,
     category,
     thumbnail,
+    publish,
   };
 }

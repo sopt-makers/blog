@@ -8,6 +8,16 @@ import { BASE_URL } from '@/const';
 
 type Props = { params: { id: string } };
 
+export async function generateStaticParams() {
+  const articles = await getArticles();
+
+  return articles
+    .filter((article) => article.publish)
+    .map((article) => ({
+      id: article.id,
+    }));
+}
+
 export async function generateMetadata({ params }: Props, _parent: ResolvingMetadata): Promise<Metadata> {
   const id = params.id;
   const article = await getArticleById(id);
@@ -34,12 +44,4 @@ export async function generateMetadata({ params }: Props, _parent: ResolvingMeta
 
 export default async function Page({ params }: Props) {
   return <ArticlePage id={params.id} />;
-}
-
-export async function generateStaticParams() {
-  const articles = await getArticles();
-
-  return articles.map((article) => ({
-    id: article.id,
-  }));
 }

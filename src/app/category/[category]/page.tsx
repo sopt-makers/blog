@@ -9,7 +9,7 @@ import BundledImage from '@/components/image/BundledImage';
 export default async function ArticleList({ params }: { params: { category?: string } }) {
   const currentCategory = params.category ? decode(decodeURIComponent(params.category)) : undefined;
 
-  const articles = await getArticles();
+  const articles = (await getArticles()).filter((article) => article.publish);
   const categories = articles.map((article) => article.category).filter((category): category is string => !!category);
   const filteredArticles = articles.filter((article) => !currentCategory || article.category === currentCategory);
 

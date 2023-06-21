@@ -21,6 +21,11 @@ export function propertyResolver(properties: PageObjectResponse['properties']) {
 
       return title;
     },
+    checkbox(name: string) {
+      const checkboxProperty = getTypedProperty(name, 'checkbox');
+
+      return checkboxProperty.checkbox;
+    },
     date(name: string) {
       const dateProperty = getTypedProperty(name, 'date');
 
