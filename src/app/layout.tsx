@@ -3,7 +3,7 @@ import './globals.css';
 import { Roboto_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 
-import { BASE_URL } from '@/const';
+import { BASE_URL, DISABLE_ROBOTS } from '@/const';
 
 export const metadata = {
   title: '메이커스 블로그',
@@ -15,19 +15,28 @@ export const metadata = {
     type: 'website',
   },
   metadataBase: BASE_URL ? new URL(BASE_URL) : undefined,
-  robots: {
-    index: false,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      'index': false,
-      'follow': true,
-      'noimageindex': true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  robots: DISABLE_ROBOTS
+    ? {
+        index: false,
+        follow: false,
+        googleBot: {
+          index: false,
+          follow: false,
+        },
+      }
+    : {
+        index: false,
+        follow: true,
+        nocache: true,
+        googleBot: {
+          'index': false,
+          'follow': true,
+          'noimageindex': true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
 };
 
 const suitFont = localFont({

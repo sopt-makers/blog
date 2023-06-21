@@ -4,7 +4,7 @@ import { getArticleById, getArticles } from '@/blog';
 import ArticlePage from '@/components/article/ArticlePage';
 import { bundleImage } from '@/components/image/bundle';
 import { getBundleKey } from '@/components/image/BundledImage';
-import { BASE_URL } from '@/const';
+import { BASE_URL, DISABLE_ROBOTS } from '@/const';
 
 type Props = { params: { id: string } };
 
@@ -39,18 +39,27 @@ export async function generateMetadata({ params }: Props, _parent: ResolvingMeta
       type: 'article',
       images: thumbnailImage,
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        'index': true,
-        'follow': true,
-        'noimageindex': false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
+    robots: DISABLE_ROBOTS
+      ? {
+          index: false,
+          follow: false,
+          googleBot: {
+            index: false,
+            follow: false,
+          },
+        }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            'index': true,
+            'follow': true,
+            'noimageindex': false,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
+        },
   };
 }
 
