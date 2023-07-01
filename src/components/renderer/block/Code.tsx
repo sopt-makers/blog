@@ -2,7 +2,6 @@ import { Code as SyntaxHighlight } from 'bright';
 import { FC } from 'react';
 
 import { PickNotionBlock } from '@/notion/types';
-import { wrapAsyncComponent } from '@/util';
 
 interface CodeProps {
   block: PickNotionBlock<'code'>;
