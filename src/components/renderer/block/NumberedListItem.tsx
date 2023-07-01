@@ -1,6 +1,5 @@
 import { getBlocks } from '@/notion/request';
 import { PickNotionBlock } from '@/notion/types';
-import { wrapAsyncComponent } from '@/util';
 
 import { BlockRenderer } from '../BlockRenderer';
 import RichTextRenderer from '../RichTextRenderer';
@@ -35,4 +34,4 @@ const NumberedListItem = async ({ block, num }: NumberedListItemProps) => {
   );
 };
 
-export default wrapAsyncComponent(NumberedListItem);
+export default NumberedListItem;

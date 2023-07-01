@@ -1,7 +1,6 @@
 import { ImgHTMLAttributes } from 'react';
 
 import { bundleImage } from '@/components/image/bundle';
-import { wrapAsyncComponent } from '@/util';
 
 import ImageReplacer from './ImageReplacer';
 import { getImageSize, getPreviewImage } from './sizing';
@@ -30,4 +29,4 @@ const BundledImage = async ({ src, alt, ...props }: BundledImage) => {
   return <ImageReplacer src={publicUrl} preview={previewImage} alt={alt} {...props} width={width} height={height} />;
 };
 
-export default wrapAsyncComponent(BundledImage);
+export default BundledImage;

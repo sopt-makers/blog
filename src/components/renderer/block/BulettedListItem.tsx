@@ -1,6 +1,5 @@
 import { getBlocks } from '@/notion/request';
 import { PickNotionBlock } from '@/notion/types';
-import { wrapAsyncComponent } from '@/util';
 
 import { BlockRenderer } from '../BlockRenderer';
 import RichTextRenderer from '../RichTextRenderer';
@@ -34,4 +33,4 @@ const BulettedListItem = async ({ block }: BulettedListItemProps) => {
   );
 };
 
-export default wrapAsyncComponent(BulettedListItem);
+export default BulettedListItem;

@@ -9,13 +9,11 @@ interface CodeProps {
 }
 SyntaxHighlight.theme = 'material-darker';
 
-const WrappedSyntaxHighlight = wrapAsyncComponent(SyntaxHighlight);
-
 const Code: FC<CodeProps> = ({ block }) => {
   const codeContent = block.code.rich_text.map((text) => text.plain_text).join('');
 
   return (
-    <WrappedSyntaxHighlight
+    <SyntaxHighlight
       lang={block.code.language}
       codeClassName='font-mono text-[13px]'
       className='rounded-[8px]'
@@ -23,7 +21,7 @@ const Code: FC<CodeProps> = ({ block }) => {
       lineNumbers
     >
       {codeContent}
-    </WrappedSyntaxHighlight>
+    </SyntaxHighlight>
   );
 };
 

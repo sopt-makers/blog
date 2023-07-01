@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { getArticleById } from '@/blog';
 import BundledImage from '@/components/image/BundledImage';
 import { BlockRenderer } from '@/components/renderer/BlockRenderer';
-import { wrapAsyncComponent } from '@/util';
 
 interface ArticlePageProps {
   id: string;
@@ -51,7 +50,7 @@ async function ArticlePage({ id }: ArticlePageProps) {
   );
 }
 
-export default wrapAsyncComponent(ArticlePage);
+export default ArticlePage;
 
 function BackIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
